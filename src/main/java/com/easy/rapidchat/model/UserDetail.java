@@ -30,8 +30,8 @@ public class UserDetail implements UserDetails {
     @ColumnDefault("uuid_generate_v4()")
     private UUID id;
     @Column(unique = true)
-    private String name;
-    private String accPassword;
+    private String username;
+    private String password;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
@@ -39,12 +39,12 @@ public class UserDetail implements UserDetails {
 
     @Override
     public String getPassword() {
-        return getAccPassword();
+        return password;
     }
 
     @Override
     public String getUsername() {
-        return getName();
+        return username;
     }
 
     @Override
