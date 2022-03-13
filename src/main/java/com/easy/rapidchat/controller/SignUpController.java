@@ -16,7 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RestController("/signup")
 public class SignUpController {
-    private  final UserService userService;
+    private final UserService userService;
+
     @PostMapping
     public ResponseEntity<HttpStatus> createUser(@RequestBody UserDetailsDTO userDetailsDTO) {
         userService.save(userDetailsDTO);

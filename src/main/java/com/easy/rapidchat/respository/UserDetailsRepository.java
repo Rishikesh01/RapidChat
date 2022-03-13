@@ -10,4 +10,5 @@ import java.util.UUID;
  * @project RapidChat
  */
 public interface UserDetailsRepository extends JpaRepository<UserDetail, UUID> {
+    UserDetail findByUsername(String username);
 }

@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 public class UserService {
     private final UserDetailsDTOMapper userDetailsDTOMapper;
     private final UserDetailsRepository userDetailsRepository;
+
     public void save(UserDetailsDTO userDetailsDTO) {
         UserDetail userDetail = userDetailsDTOMapper.toUserDetails(userDetailsDTO);
         userDetailsRepository.save(userDetail);

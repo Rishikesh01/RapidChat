@@ -32,6 +32,7 @@ public class UserDetail implements UserDetails {
     @Column(unique = true)
     private String username;
     private String password;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
