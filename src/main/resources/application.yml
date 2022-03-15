@@ -6,7 +6,7 @@ spring:
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     generate-ddl: true
@@ -16,3 +16,7 @@ spring:
         jdbc:
           lob:
             non_contextual_creation: true
+
+logging:
+  level:
+    root: debug

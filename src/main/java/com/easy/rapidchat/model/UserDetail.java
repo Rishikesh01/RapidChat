@@ -3,13 +3,13 @@ package com.easy.rapidchat.model;
 import lombok.*;
 import org.hibernate.Hibernate;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -21,17 +21,25 @@ import java.util.UUID;
 @Getter
 @Setter
 @ToString
-@RequiredArgsConstructor
-@AllArgsConstructor
 @NoArgsConstructor
 public class UserDetail implements UserDetails {
 
     @Id
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "uuid2")
     @ColumnDefault("uuid_generate_v4()")
     private UUID id;
     @Column(unique = true)
     private String username;
     private String password;
+
+    @OneToMany(mappedBy = "userDetail")
+    @ToString.Exclude
+    private List<Message> message;
+
+    @OneToMany(mappedBy = "userDetail")
+    @ToString.Exclude
+    private List<GroupUser> groupUsers;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -50,22 +58,22 @@ public class UserDetail implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 
     @Override

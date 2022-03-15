@@ -5,6 +5,7 @@ import com.easy.rapidchat.mapper.UserDetailsDTOMapper;
 import com.easy.rapidchat.model.UserDetail;
 import com.easy.rapidchat.respository.UserDetailsRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,9 +17,12 @@ import org.springframework.stereotype.Service;
 public class UserService {
     private final UserDetailsDTOMapper userDetailsDTOMapper;
     private final UserDetailsRepository userDetailsRepository;
-
+    private final BCryptPasswordEncoder encoder;
     public void save(UserDetailsDTO userDetailsDTO) {
         UserDetail userDetail = userDetailsDTOMapper.toUserDetails(userDetailsDTO);
+        System.out.println(userDetail.getUsername()+":"+userDetailsDTO.getUsername());
+        System.out.println("pass"+userDetail.getPassword());
+        userDetail.setPassword(encoder.encode(userDetailsDTO.getPassword()));
         userDetailsRepository.save(userDetail);
     }
 }

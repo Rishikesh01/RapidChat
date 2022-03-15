@@ -5,9 +5,7 @@ import lombok.*;
 import org.hibernate.Hibernate;
 import org.hibernate.annotations.ColumnDefault;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalTime;
 import java.util.Date;
 import java.util.Objects;
@@ -21,20 +19,20 @@ import java.util.UUID;
 @Getter
 @Setter
 @ToString
-@RequiredArgsConstructor
 @NoArgsConstructor
 @AllArgsConstructor
 public class Message {
     @Id
     @ColumnDefault("uuid_generate_v4()")
+    @Column(insertable = false,updatable = false)
     private UUID id;
-    private UUID senderId;
-    @Column(nullable = false)
-    private UUID receiverId;
+    @ManyToOne
+    private Group group;
     private String content;
-    private Date dateOfMsg;
     private LocalTime timeOfMsg;
     private MessageStatus status;
+    @ManyToOne
+    private UserDetail userDetail;
 
     @Override
     public boolean equals(Object o) {

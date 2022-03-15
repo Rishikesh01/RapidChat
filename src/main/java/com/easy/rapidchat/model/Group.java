@@ -4,8 +4,8 @@ import lombok.*;
 import org.hibernate.Hibernate;
 import org.hibernate.annotations.ColumnDefault;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -17,14 +17,18 @@ import java.util.UUID;
 @Getter
 @Setter
 @ToString
-@RequiredArgsConstructor
 @AllArgsConstructor
 @NoArgsConstructor
 public class Group {
     @Id
     @ColumnDefault("uuid_generate_v4()")
     private UUID id;
+    @Column(unique = true)
     private String name;
+
+    @OneToMany(mappedBy = "group")
+    @ToString.Exclude
+    private List<GroupUser> groupUsers;
 
     @Override
     public boolean equals(Object o) {

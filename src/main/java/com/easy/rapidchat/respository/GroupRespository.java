@@ -10,4 +10,5 @@ import java.util.UUID;
  * @project RapidChat
  */
 public interface GroupRespository extends JpaRepository<Group, UUID> {
+    Group findByName(String name);
 }

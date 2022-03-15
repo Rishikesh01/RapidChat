@@ -1,12 +1,12 @@
 package com.easy.rapidchat.controller;
 
-import com.easy.rapidchat.model.Message;
+import com.easy.rapidchat.dtos.MessageDTO;
+import com.easy.rapidchat.service.MessagingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
-import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -16,24 +16,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RestController
 public class MessageController {
-    private final static String messageUrlPrefix = "/topic";
-    private final SimpMessagingTemplate simpMessagingTemplate;
+    private final MessagingService messagingService;
 
     //URL /app/chat
     @MessageMapping("/group")
-    public ResponseEntity<HttpStatus> sendMsgInGroup(@Payload Message message) {
-        simpMessagingTemplate.convertAndSend(
-                messageUrlPrefix + message.getReceiverId().toString(),
-                message);
+    public ResponseEntity<HttpStatus> sendMsgInGroup(@Payload MessageDTO messageDTO) {
+        messagingService.sendMessageToGroup(messageDTO);
         return ResponseEntity.ok(HttpStatus.ACCEPTED);
     }
 
     @MessageMapping("/user")
-    public ResponseEntity<HttpStatus> sendMsgToUser(@Payload Message message) {
-        simpMessagingTemplate.convertAndSendToUser(
-                message.getReceiverId().toString(),
-                messageUrlPrefix + message.getReceiverId().toString(),
-                message);
+    public ResponseEntity<HttpStatus> sendMsgToUser(@Payload MessageDTO messageDTO) {
+        messagingService.sendMessageToUser(messageDTO);
         return ResponseEntity.ok(HttpStatus.ACCEPTED);
     }
 }

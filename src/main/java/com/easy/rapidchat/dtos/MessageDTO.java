@@ -10,6 +10,6 @@ import lombok.Data;
 @Data
 public class MessageDTO {
     private String senderUserName;
-    private String receiverUserName;
+    private String groupName;
     private String content;
 }
