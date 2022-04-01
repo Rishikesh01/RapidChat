@@ -20,8 +20,6 @@ public class UserService {
     private final BCryptPasswordEncoder encoder;
     public void save(UserDetailsDTO userDetailsDTO) {
         UserDetail userDetail = userDetailsDTOMapper.toUserDetails(userDetailsDTO);
-        System.out.println(userDetail.getUsername()+":"+userDetailsDTO.getUsername());
-        System.out.println("pass"+userDetail.getPassword());
         userDetail.setPassword(encoder.encode(userDetailsDTO.getPassword()));
         userDetailsRepository.save(userDetail);
     }

@@ -19,13 +19,13 @@ public class MessageController {
     private final MessagingService messagingService;
 
     //URL /app/chat
-    @MessageMapping("/group")
+    @MessageMapping("/group.message")
     public ResponseEntity<HttpStatus> sendMsgInGroup(@Payload MessageDTO messageDTO) {
         messagingService.sendMessageToGroup(messageDTO);
         return ResponseEntity.ok(HttpStatus.ACCEPTED);
     }
 
-    @MessageMapping("/user")
+    @MessageMapping("/user.message")
     public ResponseEntity<HttpStatus> sendMsgToUser(@Payload MessageDTO messageDTO) {
         messagingService.sendMessageToUser(messageDTO);
         return ResponseEntity.ok(HttpStatus.ACCEPTED);

@@ -1,6 +1,7 @@
 package com.easy.rapidchat.dtos;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
 /**
@@ -8,6 +9,7 @@ import lombok.Data;
  * @project RapidChat
  */
 @Data
+@NoArgsConstructor
 public class MessageDTO {
     private String senderUserName;
     private String groupName;

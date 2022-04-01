@@ -1,6 +1,7 @@
 package com.easy.rapidchat.configuration;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.messaging.simp.SimpMessageType;
 import org.springframework.security.config.annotation.web.messaging.MessageSecurityMetadataSourceRegistry;
 import org.springframework.security.config.annotation.web.socket.AbstractSecurityWebSocketMessageBrokerConfigurer;
 
@@ -13,6 +14,15 @@ public class WebSocketSecurityConfig extends AbstractSecurityWebSocketMessageBro
 
     @Override
     protected void configureInbound(MessageSecurityMetadataSourceRegistry messages) {
-        messages.simpDestMatchers("/group","/user").authenticated().anyMessage().authenticated();
+        messages
+                .simpDestMatchers("/group","/user")
+                .authenticated()
+                .simpTypeMatchers(SimpMessageType.CONNECT,SimpMessageType.HEARTBEAT,SimpMessageType.SUBSCRIBE,SimpMessageType.DISCONNECT)
+                .permitAll().anyMessage().authenticated();
+    }
+
+    @Override
+    protected boolean sameOriginDisabled() {
+       return  true;
     }
 }
