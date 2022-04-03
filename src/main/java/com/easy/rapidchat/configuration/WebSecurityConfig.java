@@ -24,7 +24,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().cors().and()
                 .authorizeRequests()
-                .antMatchers("/login", "/signup","/ws")
+                .antMatchers("/login", "/signup", "/ws")
                 .permitAll()
                 .and()
                 .authorizeRequests()
@@ -43,4 +43,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public BCryptPasswordEncoder bcrypt() {
         return new BCryptPasswordEncoder();
     }
+
 }

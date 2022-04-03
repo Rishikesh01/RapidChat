@@ -3,6 +3,8 @@ package com.easy.rapidchat.dtos;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 
 /**
  * @author Rishikesh
@@ -10,7 +12,7 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @NoArgsConstructor
-public class MessageDTO {
+public class MessageDTO  {
     private String senderUserName;
     private String groupName;
     private String content;

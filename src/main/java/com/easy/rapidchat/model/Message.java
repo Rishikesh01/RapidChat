@@ -4,6 +4,7 @@ import com.easy.rapidchat.enums.MessageStatus;
 import lombok.*;
 import org.hibernate.Hibernate;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalTime;
@@ -23,6 +24,8 @@ import java.util.UUID;
 @AllArgsConstructor
 public class Message {
     @Id
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "uuid2")
     @ColumnDefault("uuid_generate_v4()")
     @Column(insertable = false,updatable = false)
     private UUID id;

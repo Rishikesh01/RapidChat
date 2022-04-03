@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -14,20 +15,22 @@ import org.springframework.web.bind.annotation.RestController;
  * @project RapidChat
  */
 @RequiredArgsConstructor
-@RestController
+@Controller
 public class MessageController {
     private final MessagingService messagingService;
 
     //URL /app/chat
-    @MessageMapping("/group.message")
-    public ResponseEntity<HttpStatus> sendMsgInGroup(@Payload MessageDTO messageDTO) {
+    @MessageMapping("/groups")
+    public ResponseEntity<MessageDTO> sendMsgInGroup(@Payload MessageDTO messageDTO) {
         messagingService.sendMessageToGroup(messageDTO);
-        return ResponseEntity.ok(HttpStatus.ACCEPTED);
+        return ResponseEntity.accepted().body(messageDTO);
     }
 
-    @MessageMapping("/user.message")
-    public ResponseEntity<HttpStatus> sendMsgToUser(@Payload MessageDTO messageDTO) {
+    @MessageMapping("/users")
+    public ResponseEntity<MessageDTO> sendMsgToUser(@Payload MessageDTO messageDTO) {
         messagingService.sendMessageToUser(messageDTO);
-        return ResponseEntity.ok(HttpStatus.ACCEPTED);
+        return ResponseEntity.accepted().body(messageDTO);
     }
+
+
 }

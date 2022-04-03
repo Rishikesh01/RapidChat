@@ -18,6 +18,7 @@ public class UserService {
     private final UserDetailsDTOMapper userDetailsDTOMapper;
     private final UserDetailsRepository userDetailsRepository;
     private final BCryptPasswordEncoder encoder;
+
     public void save(UserDetailsDTO userDetailsDTO) {
         UserDetail userDetail = userDetailsDTOMapper.toUserDetails(userDetailsDTO);
         userDetail.setPassword(encoder.encode(userDetailsDTO.getPassword()));
