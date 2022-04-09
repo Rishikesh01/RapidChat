@@ -1,6 +1,9 @@
 package com.easy.rapidchat.model;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.Hibernate;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.GenericGenerator;
@@ -39,7 +42,7 @@ public class UserDetail implements UserDetails {
 
     @OneToMany(mappedBy = "userDetail")
     @ToString.Exclude
-    private List<GroupUser> groupUsers;
+    private List<RoomUser> roomUsers;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

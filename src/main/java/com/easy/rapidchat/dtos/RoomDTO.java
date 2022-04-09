@@ -5,17 +5,15 @@ import lombok.NoArgsConstructor;
 
 import java.util.UUID;
 
-
 /**
  * @author Rishikesh
  * @project RapidChat
  */
 @Data
 @NoArgsConstructor
-public class MessageDTO {
-    private String senderUserName;
+public class RoomDTO {
+    private UUID id;
+    private String roomType;
     private String chatName;
     private String roomID;
-    private UUID roomUID;
-    private String content;
 }

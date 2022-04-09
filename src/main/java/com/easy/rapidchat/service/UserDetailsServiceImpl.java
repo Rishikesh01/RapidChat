@@ -8,8 +8,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 /**
  * @author Rishikesh
  * @project RapidChat
@@ -23,8 +21,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         UserDetail result = userDetailsRepository.findByUsername(username);
-        if(result!=null)
+        if (result != null)
             return result;
-        throw new UsernameNotFoundException("user with username"+username+"not found");
+        throw new UsernameNotFoundException("user with username" + username + "not found");
     }
 }

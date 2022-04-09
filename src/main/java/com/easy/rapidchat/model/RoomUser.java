@@ -17,7 +17,7 @@ import java.util.UUID;
 @ToString
 @RequiredArgsConstructor
 @AllArgsConstructor
-public class GroupUser {
+public class RoomUser {
     @Id
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "uuid2")
@@ -25,7 +25,7 @@ public class GroupUser {
     private UUID id;
     @ManyToOne
     @ToString.Exclude
-    private Group group;
+    private Room room;
     @ManyToOne
     @ToString.Exclude
     private UserDetail userDetail;

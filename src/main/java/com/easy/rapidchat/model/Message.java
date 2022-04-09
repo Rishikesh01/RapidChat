@@ -8,7 +8,6 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalTime;
-import java.util.Date;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -30,7 +29,8 @@ public class Message {
     @Column(insertable = false,updatable = false)
     private UUID id;
     @ManyToOne
-    private Group group;
+    private Room room;
+    private boolean isDirectMessage;
     private String content;
     private LocalTime timeOfMsg;
     private MessageStatus status;

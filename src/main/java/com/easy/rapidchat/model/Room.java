@@ -20,25 +20,26 @@ import java.util.UUID;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class Group {
+public class Room {
     @Id
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "uuid2")
     @ColumnDefault("uuid_generate_v4()")
     private UUID id;
+    private String chatName;
     @Column(unique = true)
-    private String name;
+    private String topicID;
 
-    @OneToMany(mappedBy = "group")
+    @OneToMany(mappedBy = "room")
     @ToString.Exclude
-    private List<GroupUser> groupUsers;
+    private List<RoomUser> roomUsers;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        Group group = (Group) o;
-        return id != null && Objects.equals(id, group.id);
+        Room room = (Room) o;
+        return id != null && Objects.equals(id, room.id);
     }
 
     @Override
