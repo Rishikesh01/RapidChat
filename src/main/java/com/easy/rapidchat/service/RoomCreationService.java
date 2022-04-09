@@ -5,7 +5,7 @@ import com.easy.rapidchat.mapper.RoomDTOMapper;
 import com.easy.rapidchat.model.Room;
 import com.easy.rapidchat.model.RoomUser;
 import com.easy.rapidchat.model.UserDetail;
-import com.easy.rapidchat.respository.GroupRepository;
+import com.easy.rapidchat.respository.RoomRepository;
 import com.easy.rapidchat.respository.UserDetailsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,7 +21,7 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 public class RoomCreationService {
-    private final GroupRepository groupRepository;
+    private final RoomRepository roomRepository;
     private final UserDetailsRepository userDetailsRepository;
     private final RoomDTOMapper roomDTOMapper;
 
@@ -31,7 +31,7 @@ public class RoomCreationService {
             RoomUser roomUser = new RoomUser(null, room, userDetail);
             roomUsers.add(roomUser);
         }
-        roomUsers.forEach(groupRepository::save);
+        roomUsers.forEach(roomRepository::save);
     }
 
     public RoomDTO makeDirectMessageRoom(String username, String toUsername) {
@@ -45,7 +45,7 @@ public class RoomCreationService {
         List<UserDetail> userDetails = new ArrayList<>();
         userDetails.add(userDetailsRepository.findByUsername(username));
         userDetails.add(userDetailsRepository.findByUsername(toUsername));
-        groupRepository.save(room);
+        roomRepository.save(room);
         addRoomUsers(userDetails, room);
         return roomDTOMapper.toRoomDTO(room);
     }
@@ -63,7 +63,7 @@ public class RoomCreationService {
             UserDetail userDetail = userDetailsRepository.findByUsername(user);
             userDetails.add(userDetail);
         }
-        groupRepository.save(room);
+        roomRepository.save(room);
         addRoomUsers(userDetails, room);
         return roomDTOMapper.toRoomDTO(room);
     }

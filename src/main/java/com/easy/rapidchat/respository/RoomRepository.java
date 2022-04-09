@@ -10,7 +10,7 @@ import java.util.UUID;
  * @author Rishikesh
  * @project RapidChat
  */
-public interface GroupRepository extends JpaRepository<Room, UUID> {
+public interface RoomRepository extends JpaRepository<Room, UUID> {
     Room findByTopicID(String topicId);
 
     void save(RoomUser roomUser);

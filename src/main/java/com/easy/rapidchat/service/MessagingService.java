@@ -5,7 +5,7 @@ import com.easy.rapidchat.mapper.MessageDTOMapper;
 import com.easy.rapidchat.model.Room;
 import com.easy.rapidchat.model.Message;
 import com.easy.rapidchat.model.UserDetail;
-import com.easy.rapidchat.respository.GroupRepository;
+import com.easy.rapidchat.respository.RoomRepository;
 import com.easy.rapidchat.respository.MessageRespository;
 import com.easy.rapidchat.respository.UserDetailsRepository;
 import lombok.RequiredArgsConstructor;
@@ -33,7 +33,7 @@ public class MessagingService {
     private final SimpMessagingTemplate messagingTemplate;
     private final MessageDTOMapper messageDTOMapper;
     private final MessageRespository messageRespository;
-    private final GroupRepository groupRepository;
+    private final RoomRepository roomRepository;
     private final UserDetailsRepository userDetailsRepository;
 
     public void sendMessageToUser(MessageDTO messageDTO) {
@@ -66,7 +66,7 @@ public class MessagingService {
 
     private void persistMessage(MessageDTO messageDTO, String typeOfRoom) {
         Message message = messageDTOMapper.toMessageModel(messageDTO);
-        Room room = groupRepository.findByTopicID(messageDTO.getRoomID());
+        Room room = roomRepository.findByTopicID(messageDTO.getRoomID());
         UserDetail userDetail = userDetailsRepository.findByUsername(messageDTO.getSenderUserName());
         message.setRoom(room);
         message.setUserDetail(userDetail);
