@@ -8,6 +8,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalTime;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -36,6 +37,10 @@ public class Message {
     private MessageStatus status;
     @ManyToOne
     private UserDetail userDetail;
+
+    @OneToMany(mappedBy = "userDetail")
+    @ToString.Exclude
+    private List<RoomUser> roomUsers;
 
     @Override
     public boolean equals(Object o) {

@@ -10,6 +10,7 @@ import com.easy.rapidchat.respository.UserDetailsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -67,4 +68,13 @@ public class RoomCreationService {
         addRoomUsers(userDetails, room);
         return roomDTOMapper.toRoomDTO(room);
     }
+
+//    @PostConstruct
+//    public void init(){
+//        String[][] users = {{"test"},{"test1"},{"tim"},{"tom"}};
+//            makeDirectMessageRoom(users[0][0],users[1][0]);
+//            makeDirectMessageRoom(users[1][0],users[2][0]);
+//            makeDirectMessageRoom(users[2][0],users[3][0]);
+//           makeDirectMessageRoom(users[3][0],users[0][0]);
+//    }
 }

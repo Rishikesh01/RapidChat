@@ -10,4 +10,5 @@ import java.util.UUID;
  * @project RapidChat
  */
 public interface RoomUserRepository extends JpaRepository<RoomUser, UUID> {
+
 }

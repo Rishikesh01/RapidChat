@@ -27,7 +27,7 @@ public class MessagingController {
     public ResponseEntity<List<MessageDTO>> getAllTheLatestMessages(
             @AuthenticationPrincipal UserDetail userDetail
     ) {
-        List<MessageDTO> messages = null;
+        List<MessageDTO> messages = messagingService.getAllTheLatestMessages(userDetail);
 
         return ResponseEntity.ok(messages);
     }
