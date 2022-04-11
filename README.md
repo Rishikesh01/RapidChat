@@ -41,6 +41,7 @@
 The above apis have accepts message json.
 
 ## Apis
+
 All the contents inside of ```{...}``` are url params which should be supplied by client.
 
 - ```GET /api/v1/create/room/user/dm/{user}```: client needs to create inbox before being able to send message to
@@ -68,4 +69,14 @@ All the contents inside of ```{...}``` are url params which should be supplied b
   message.
 
 
+## Requirements for running the project
+
+- Need to have installed postgresql with UUID extension enabled.
+- Need to have rabbitmq installed with stomp plugin enabled.
+
+## How to run this project
+- simply run `./gradle build` you can find the jar file in build/libs folder.
+- To run just use `java -jar name-of-the-jar.jar`
+
+- <sub><sup> Disclaimer you might need to change some configs to run the code if you have different username/pass/port.<sup><sub>
 ### Beta 1.0V
