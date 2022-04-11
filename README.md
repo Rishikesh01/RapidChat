@@ -86,4 +86,3 @@ All the contents inside of ```{...}``` are url params which should be supplied b
 - To run just use `java -jar name-of-the-jar.jar`
 
 - <sub><sup> Disclaimer you might need to change some configs to run the code if you have different username/pass/port.<sup><sub>
-### Beta 1.0V
