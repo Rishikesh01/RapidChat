@@ -13,11 +13,12 @@ import org.springframework.web.socket.messaging.SessionDisconnectEvent;
 public class EventControllerService {
     @EventListener
     public void isConnected(SessionConnectEvent event) {
+        System.out.println("connected");
     }
 
     @EventListener
     public void disconnected(SessionDisconnectEvent event) {
-
+        System.out.println("disconnected");
     }
 
 }

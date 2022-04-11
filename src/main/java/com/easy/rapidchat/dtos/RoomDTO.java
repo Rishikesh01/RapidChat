@@ -13,7 +13,7 @@ import java.util.UUID;
 @NoArgsConstructor
 public class RoomDTO {
     private UUID id;
-    private String roomType;
+    private boolean isGroup;
     private String chatName;
-    private String roomID;
+    private UUID channelID;
 }

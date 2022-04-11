@@ -20,7 +20,7 @@ import java.util.UUID;
  */
 @Service
 @RequiredArgsConstructor
-public class RoomCreationService {
+public class RoomService {
     private final RoomRepository roomRepository;
     private final UserDetailsRepository userDetailsRepository;
     private final RoomDTOMapper roomDTOMapper;
@@ -35,10 +35,11 @@ public class RoomCreationService {
     }
 
     public RoomDTO makeDirectMessageRoom(String username, String toUsername) {
-        String topicID = UUID.randomUUID().toString();
+        UUID topicID = UUID.randomUUID();
         Room room = new Room(
                 null,
                 username + "_" + toUsername,
+                false,
                 topicID,
                 null
         );
@@ -51,10 +52,11 @@ public class RoomCreationService {
     }
 
     public RoomDTO makeGroupRoom(String groupName, List<String> usernames) {
-        String topicID = UUID.randomUUID().toString();
+        UUID topicID = UUID.randomUUID();
         Room room = new Room(
                 null,
                 groupName,
+                true,
                 topicID,
                 null
         );
@@ -66,6 +68,10 @@ public class RoomCreationService {
         roomRepository.save(room);
         addRoomUsers(userDetails, room);
         return roomDTOMapper.toRoomDTO(room);
+    }
+
+    public List<RoomDTO> getAllTheRooms(UserDetail user) {
+        return new ArrayList<>(roomDTOMapper.toRoomDTOList(roomRepository.joinRoomUserAndRoomOnUserId(user)));
     }
 
 }

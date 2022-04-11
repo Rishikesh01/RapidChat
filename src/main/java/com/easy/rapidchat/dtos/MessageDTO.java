@@ -14,8 +14,7 @@ import java.util.UUID;
 @NoArgsConstructor
 public class MessageDTO {
     private String senderID;
-    private String chatName;
-    private String channelID;
     private UUID roomUID;
+    private UUID channelID;
     private String content;
 }

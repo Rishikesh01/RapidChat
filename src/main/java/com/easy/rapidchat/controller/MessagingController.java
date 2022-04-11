@@ -1,8 +1,10 @@
 package com.easy.rapidchat.controller;
 
 import com.easy.rapidchat.dtos.MessageDTO;
+import com.easy.rapidchat.dtos.RoomDTO;
 import com.easy.rapidchat.model.UserDetail;
 import com.easy.rapidchat.service.MessagingService;
+import com.easy.rapidchat.service.RoomService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -19,9 +21,18 @@ import java.util.List;
  */
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/user")
+@RequestMapping("/api/v1/user")
 public class MessagingController {
     private final MessagingService messagingService;
+    private final RoomService roomService;
+
+    @GetMapping("/all/rooms")
+    public ResponseEntity<List<RoomDTO>> getAllTheRooms(
+            @AuthenticationPrincipal UserDetail userDetail
+    ) {
+        List<RoomDTO> rooms = roomService.getAllTheRooms(userDetail);
+        return ResponseEntity.ok(rooms);
+    }
 
     @GetMapping("/new/message")
     public ResponseEntity<List<MessageDTO>> getAllTheLatestMessages(

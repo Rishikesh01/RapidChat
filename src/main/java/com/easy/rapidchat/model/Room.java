@@ -27,8 +27,9 @@ public class Room {
     @ColumnDefault("uuid_generate_v4()")
     private UUID id;
     private String chatName;
+    private boolean isGroup;
     @Column(unique = true)
-    private String topicID;
+    private UUID topicID;
 
     @OneToMany(mappedBy = "room")
     @ToString.Exclude

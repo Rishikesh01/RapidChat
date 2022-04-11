@@ -23,7 +23,7 @@ public class InstantMessageController {
         return ResponseEntity.accepted().body(messageDTO);
     }
 
-    @MessageMapping("/users")
+    @MessageMapping("/inbox")
     public ResponseEntity<MessageDTO> sendMsgToUser(@Payload MessageDTO messageDTO) {
         messagingService.sendMessageToUser(messageDTO);
         return ResponseEntity.accepted().body(messageDTO);

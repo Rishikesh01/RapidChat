@@ -2,7 +2,7 @@ package com.easy.rapidchat.controller;
 
 import com.easy.rapidchat.dtos.RoomDTO;
 import com.easy.rapidchat.model.UserDetail;
-import com.easy.rapidchat.service.RoomCreationService;
+import com.easy.rapidchat.service.RoomService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -19,27 +19,27 @@ import java.util.List;
  */
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/create/room/user")
+@RequestMapping("/api/v1/create/room/user")
 public class RoomCreationController {
-    private final RoomCreationService roomCreationService;
+    private final RoomService roomService;
 
     @GetMapping("/dm/{user}")
     public ResponseEntity<RoomDTO> createDirectMessageRoom(
             @AuthenticationPrincipal UserDetail userDetail,
             @PathVariable("user") String toUser
     ) {
-        RoomDTO room = roomCreationService.makeDirectMessageRoom(userDetail.getUsername(), toUser);
-        room.setRoomType("inbox");
+        RoomDTO room = roomService.makeDirectMessageRoom(userDetail.getUsername(), toUser);
         return ResponseEntity.ok(room);
     }
 
     @GetMapping("/group/{name}")
     public ResponseEntity<RoomDTO> createGroupRoom(
             @PathVariable("name") String groupName,
-            List<String> usernames
+            List<String> usernames,
+            @AuthenticationPrincipal UserDetail userDetail
     ) {
-        RoomDTO room = roomCreationService.makeGroupRoom(groupName, usernames);
-        room.setRoomType("group");
+        usernames.add(userDetail.getUsername());
+        RoomDTO room = roomService.makeGroupRoom(groupName, usernames);
         return ResponseEntity.ok(room);
     }
 }
