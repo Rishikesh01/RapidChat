@@ -33,12 +33,19 @@
   } 
   ```
 
-## Stomp Apis
-
+## Instant Messaging Apis
+<b>To send messages you need to publish to this api</b>
 - ```/group```
 - ```/inbox```
 
 The above apis have accepts message json.
+
+<b>To receive Messages </b>
+
+- `/topic/group.+topicID`
+- `/topic/user.+topicID`
+
+The above apis sends message json.
 
 ## Apis
 
