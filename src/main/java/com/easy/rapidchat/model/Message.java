@@ -27,7 +27,7 @@ public class Message {
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "uuid2")
     @ColumnDefault("uuid_generate_v4()")
-    @Column(insertable = false,updatable = false)
+    @Column(insertable = false, updatable = false)
     private UUID id;
     @ManyToOne
     private Room room;

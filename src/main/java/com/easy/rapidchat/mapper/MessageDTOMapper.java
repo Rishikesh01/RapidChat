@@ -20,16 +20,16 @@ public interface MessageDTOMapper {
     @Mappings({
             @Mapping(target = "roomUID", expression = "java(message.getRoom().getId())"),
             @Mapping(target = "senderID", expression = "java(message.getUserDetail().getId().toString())"),
-            @Mapping(target = "chatName",expression = "java(message.getRoom().getChatName())"),
-            @Mapping(target = "channelID",expression = "java(message.getRoom().getTopicID())")
+            @Mapping(target = "chatName", expression = "java(message.getRoom().getChatName())"),
+            @Mapping(target = "channelID", expression = "java(message.getRoom().getTopicID())")
     })
     MessageDTO toMessageDTO(Message message);
 
     @Mappings({
             @Mapping(target = "roomUID", expression = "java(message.getRoom().getId())"),
             @Mapping(target = "senderID", expression = "java(message.getUserDetail().getId().toString())"),
-            @Mapping(target = "chatName",expression = "java(message.getRoom().getChatName())"),
-            @Mapping(target = "channelID",expression = "java(message.getRoom().getTopicID())")
+            @Mapping(target = "chatName", expression = "java(message.getRoom().getChatName())"),
+            @Mapping(target = "channelID", expression = "java(message.getRoom().getTopicID())")
 
     })
     List<MessageDTO> toListMessageDTO(List<Message> message);

@@ -12,6 +12,7 @@ import java.util.UUID;
  */
 public interface RoomRepository extends JpaRepository<Room, UUID> {
     Room findByTopicID(String topicId);
+
     Room findByChatName(String name);
 
     void save(RoomUser roomUser);

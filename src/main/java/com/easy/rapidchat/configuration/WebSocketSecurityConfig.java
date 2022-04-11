@@ -15,7 +15,7 @@ public class WebSocketSecurityConfig extends AbstractSecurityWebSocketMessageBro
     @Override
     protected void configureInbound(MessageSecurityMetadataSourceRegistry messages) {
         messages
-                .simpDestMatchers("/group","/user")
+                .simpDestMatchers("/group", "/user")
                 .authenticated()
                 .simpTypeMatchers(
                         SimpMessageType.CONNECT,
@@ -27,6 +27,6 @@ public class WebSocketSecurityConfig extends AbstractSecurityWebSocketMessageBro
 
     @Override
     protected boolean sameOriginDisabled() {
-       return  true;
+        return true;
     }
 }

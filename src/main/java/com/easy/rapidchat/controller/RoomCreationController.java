@@ -28,7 +28,7 @@ public class RoomCreationController {
             @AuthenticationPrincipal UserDetail userDetail,
             @PathVariable("user") String toUser
     ) {
-        RoomDTO room = roomCreationService.makeDirectMessageRoom(userDetail.getUsername(),toUser);
+        RoomDTO room = roomCreationService.makeDirectMessageRoom(userDetail.getUsername(), toUser);
         room.setRoomType("inbox");
         return ResponseEntity.ok(room);
     }
@@ -38,7 +38,7 @@ public class RoomCreationController {
             @PathVariable("name") String groupName,
             List<String> usernames
     ) {
-        RoomDTO room = roomCreationService.makeGroupRoom(groupName,usernames);
+        RoomDTO room = roomCreationService.makeGroupRoom(groupName, usernames);
         room.setRoomType("group");
         return ResponseEntity.ok(room);
     }

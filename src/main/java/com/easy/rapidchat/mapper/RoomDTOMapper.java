@@ -11,6 +11,6 @@ import org.mapstruct.Mapping;
  */
 @Mapper(componentModel = "spring")
 public interface RoomDTOMapper {
-    @Mapping(target = "roomID",source = "topicID")
+    @Mapping(target = "roomID", source = "topicID")
     RoomDTO toRoomDTO(Room room);
 }

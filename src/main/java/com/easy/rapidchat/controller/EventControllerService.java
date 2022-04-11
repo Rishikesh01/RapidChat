@@ -16,7 +16,7 @@ public class EventControllerService {
     }
 
     @EventListener
-    public void disconnected(SessionDisconnectEvent event){
+    public void disconnected(SessionDisconnectEvent event) {
 
     }
 
