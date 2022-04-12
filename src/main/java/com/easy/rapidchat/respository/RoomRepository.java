@@ -22,7 +22,5 @@ public interface RoomRepository extends JpaRepository<Room, UUID> {
                     " where room_user.user_detail_id=?1")
     List<Room> joinRoomUserAndRoomOnUserId(UserDetail userdetail);
 
-    Room findByTopicID(UUID topicID);
-
     void save(RoomUser roomUser);
 }

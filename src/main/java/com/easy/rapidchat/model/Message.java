@@ -31,7 +31,6 @@ public class Message {
     private UUID id;
     @ManyToOne
     private Room room;
-    private boolean isDirectMessage;
     private String content;
     private LocalTime timeOfMsg;
     private MessageStatus status;

@@ -7,8 +7,10 @@
 - Message JSON format:
     ```
   {
+  "id":"message" //needs to be null when sending the message
   "senderID":"ID of the sender",
   "roomUID":"uuid of the room", 
+  "channelID":"rabbitmq topic",
   "content":"content of the msg"
   }
   ```
@@ -20,7 +22,7 @@
   "id":"UUID of the room",
   "isGroup":"boolean",
   "chatName":"name of the chat to be displayed",
-  "channelID":"UUID of the topic"
+  "channelID":"rabbitmq topicid"
    }
   ```
 - Signup JSON Format:
@@ -68,12 +70,12 @@ All the contents inside of ```{...}``` are url params which should be supplied b
 - ``` GET /api/v1/user/new/message```:gets all the new messages from all the rooms.
 
 
-- ```GET /api/v1/user/old/messages/{dm}/{offset}```:gets the old messages of dm. Client needs to pass offset to fetch
-  message.
+- ```GET /api/v1/user/old/messages/inbox/{dm}/{offset}```:gets the old messages of dm. Client needs to pass offset to fetch
+  message. The path variable <B>dm</B> must be roomUID of the inbox.
 
 
-- ```GET /api/v1/user/old/messages/{group}/{offset}```:gets old messages of group. Client needs to pass offset to fetch
-  message.
+- ```GET /api/v1/user/old/messages/group/{group}/{offset}```:gets old messages of group. Client needs to pass offset to fetch
+  message. The path variable <B>group</B> must be roomUID of the group.
 
 
 ## Requirements for running the project

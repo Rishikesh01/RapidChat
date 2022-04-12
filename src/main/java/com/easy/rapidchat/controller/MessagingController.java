@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @author Rishikesh
@@ -43,23 +44,21 @@ public class MessagingController {
         return ResponseEntity.ok(messages);
     }
 
-    @GetMapping("/old/messages/{dm}/{offset}")
+    @GetMapping("/old/messages/dm/{roomUID}/{offset}")
     public ResponseEntity<List<MessageDTO>> getUserDMS(
-            @AuthenticationPrincipal UserDetail userDetail,
             @PathVariable("offset") int offset,
-            @PathVariable("dm") String dm
+            @PathVariable("roomUID") String dm
     ) {
-        List<MessageDTO> messages = messagingService.getUserDMS(userDetail, offset);
+        List<MessageDTO> messages = messagingService.getUserDMS(dm, offset);
         return ResponseEntity.ok(messages);
     }
 
-    @GetMapping("/old/messages/{group}/{offset}")
+    @GetMapping("/old/messages/group/{roomUID}/{offset}")
     public ResponseEntity<List<MessageDTO>> getGroupMessages(
-            @AuthenticationPrincipal UserDetail userDetail,
             @PathVariable("offset") int offset,
-            @PathVariable("group") String group
+            @PathVariable("roomUID") String group
     ) {
-        List<MessageDTO> groupMessages = messagingService.getUserGroupMessages(userDetail, offset);
+        List<MessageDTO> groupMessages = messagingService.getUserGroupMessages(UUID.fromString(group), offset);
         return ResponseEntity.ok(groupMessages);
     }
 }

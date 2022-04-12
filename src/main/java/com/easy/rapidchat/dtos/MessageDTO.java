@@ -13,7 +13,8 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 public class MessageDTO {
-    private String senderID;
+    private UUID id;
+    private UUID senderID;
     private UUID roomUID;
     private UUID channelID;
     private String content;

@@ -19,10 +19,30 @@ public interface MessageRespository extends JpaRepository<Message, UUID> {
             value = "select * from message  inner join" +
                     " room_user on " +
                     " message.room_id=room_user.room_id" +
-                    " where room_user.user_detail_id=?1")
-    List<Message> findAllByUserDetail(UserDetail userDetail);
+                    " where room_user.user_detail_id=?1 order by time_of_msg desc ")
+    List<Message> findNewMessagesByUserDetail(UserDetail userDetail, Pageable pageable);
 
-    List<Message> findByUserDetailAndDirectMessageIsFalse(UserDetail userDetail, Pageable pageable);
+    @Query(
+            nativeQuery = true,
+            value = "select * from message as msg inner  join" +
+                    " room on msg.room_id=room.id " +
+                    " where room.id=?1 " +
+                    " order by time_of_msg desc ",
+            countQuery = "select count (id) from message inner  join" +
+                    " room on messsage.room_id=room.id " +
+                    " where room.id=?1 "
+    )
+    List<Message> findByUserDetailAndUserDetailOrderByTimeOfMsgDesc(UUID roomID, Pageable pageable);
 
-    List<Message> findByUserDetailAndDirectMessageIsTrue(UserDetail userDetail, Pageable pageable);
+    @Query(
+            nativeQuery = true,
+            value = "select * from message as msg inner  join" +
+                    " room on msg.room_id=room.id " +
+                    " where room.id=?1 " +
+                    " order by time_of_msg desc ",
+            countQuery = "select count (id) from message inner  join" +
+                    " room on messsage.room_id=room.id " +
+                    " where room.id=?1 "
+    )
+    List<Message> findByRoomOrderByTimeOfMsgDesc(UUID roomID, Pageable pageable);
 }
